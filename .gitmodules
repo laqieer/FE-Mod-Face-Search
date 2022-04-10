@@ -1,0 +1,3 @@
+[submodule "face/FE-Mod-Face-Repo"]
+	path = face/FE-Mod-Face-Repo
+	url = git@github.com:laqieer/FE-Mod-Face-Repo.git
