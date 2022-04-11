@@ -27,11 +27,19 @@ async function generateRefMap() {
     }
     refMap.set(imgHash, valueArray);
   }
-  console.log(refMap);
+}
+
+async function saveRefMap() {
+  fs.writeFile("refMap.json", JSON.stringify([...refMap]), function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
 }
 
 async function initInMemoryHashMap() {
   await generateRefMap();
+  await saveRefMap();
 }
 
 async function hash(imgPath) {
