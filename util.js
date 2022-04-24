@@ -5,6 +5,14 @@ const { imageFromBuffer, getImageData } = require("@canvas/image");
 const imgFolder = "./img/";
 const refMap = new Map();
 
+function strMapToObj(strMap) {
+  let obj = Object.create(null);
+  for (let [k,v] of strMap) {
+    obj[k] = v;
+  }
+  return obj;
+}
+
 async function getFileNames() {
   return new Promise((resolve, reject) => {
     fs.readdir(imgFolder, (err, files) => {
@@ -30,7 +38,7 @@ async function generateRefMap() {
 }
 
 async function saveRefMap() {
-  fs.writeFile("refMap.json", JSON.stringify([...refMap]), function(err) {
+  fs.writeFile("refMap.json", JSON.stringify(strMapToObj(refMap)), function(err) {
     if (err) {
       console.log(err);
     }
