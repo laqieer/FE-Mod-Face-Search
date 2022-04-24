@@ -11,9 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@canvas/image": "^1.0.0",
+    "blockhash": "^0.2.0",
     "blockhash-core": "^0.1.0",
     "boxen": "^4.2.0",
+    "browserify": "^17.0.0",
     "chalk": "^4.1.0",
+    "png-js": "^1.0.0",
     "yargs": "^16.0.3"
   }
 }
