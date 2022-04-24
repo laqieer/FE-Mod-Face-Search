@@ -46,7 +46,7 @@ async function hash(imgPath) {
   try {
     const data = await readFile(imgPath);
     const hash = await blockhash.bmvbhash(getImageData(data), 8);
-    return hexToBin(hash);
+    return hash;
   } catch (error) {
     console.log(error);
   }
@@ -96,6 +96,8 @@ function readFile(path) {
 function calculateSimilarity(hash1, hash2) {
   // Hamming Distance
   let similarity = 0;
+  hash1 = hexToBin(hash1);
+  hash2 = hexToBin(hash2);
   hash1Array = hash1.split("");
   hash1Array.forEach((bit, index) => {
     hash2[index] === bit ? similarity++ : null;
