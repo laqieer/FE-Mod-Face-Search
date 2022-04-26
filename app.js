@@ -1,13 +1,18 @@
 class App {
     constructor() {
         this.refMap = new Map();
+        this.files = [];
         this.file = null;
         this.upload = document.getElementById( 'file' );
         this.upload.addEventListener( 'change', evt => this.doUpload( evt ) );
         this.preview = document.getElementById( 'preview' );
+        this.result = document.getElementById( 'result' );
         fetch("https://raw.githubusercontent.com/laqieer/FE-Mod-Face-Search/main/refMap.json")
         .then(blob => blob.json())
         .then(data => this.refMap = data);
+        fetch("https://raw.githubusercontent.com/laqieer/FE-Mod-Face-Search/main/files.json")
+        .then(blob => blob.json())
+        .then(data => this.files = data);
     }
     
     async doUpload( event ) {
@@ -20,7 +25,23 @@ class App {
         var imgData = ctx.getImageData( 0, 0, bitmap.width, bitmap.height );
         var hash = bmvbhash( imgData, 8 );
         console.log( 'Hash: ' + hash );
-        console.log( this.refMap[hash] );
+        var imgs = this.refMap[hash];
+        if ( imgs == undefined ) {
+            imgs = []
+        }
+        this.result.innerHTML = '<b>' + imgs.length + ' results found.' + '</b>';
+        for ( var i in imgs ) {
+            this.result.appendChild( document.createElement('br') );
+            var id = imgs[i].replace( /[^0-9]/ig, '' );
+            var file = this.files[id];
+            if ( file != undefined ) {
+                this.result.appendChild( document.createTextNode( file ) );
+            }
+            this.result.appendChild( document.createElement('br') );
+            var img = document.createElement( 'img' );
+            img.src = imgs[i];
+            this.result.appendChild( img );
+        }
     };
 }
 
