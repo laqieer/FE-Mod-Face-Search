@@ -1,3 +1,18 @@
+const one_bits = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4];
+
+function hammingDistance( hash1, hash2 ) {
+  let d = 0;
+  let i;
+
+  for( i = 0; i < hash1.length; i++ ) {
+    let n1 = parseInt( hash1[i], 16 );
+    let n2 = parseInt( hash2[i], 16 );
+    d += one_bits[n1 ^ n2];
+  }
+
+  return d;
+}
+
 function median (data) {
   var mdarr = data.slice(0)
   mdarr.sort(function (a, b) { return a - b })

@@ -1,3 +1,5 @@
+const MAX_DISTANCE = 12;
+
 class App {
     constructor() {
         this.refMap = new Map();
@@ -42,10 +44,36 @@ class App {
         var hash = bmvbhash( imgData, 8 );
         console.log( 'Hash: ' + hash );
         var imgs = this.refMap[hash];
+        var distance = 0;
         if ( imgs == undefined ) {
             imgs = [];
+            var hashes = [];
+            for ( var h in this.refMap ) {
+                var dis = hammingDistance( hash, h );
+                if ( dis > MAX_DISTANCE ) {
+                    continue;
+                }
+                if ( hashes[dis] == undefined ) {
+                    hashes[dis] = [ h ]
+                } else {
+                    hashes[dis].push( h );
+                }
+            }
+            for ( var d in hashes ) {
+                if ( hashes[d] != undefined ) {
+                    for ( var i in hashes[d] ) {
+                        imgs.push( ...this.refMap[hashes[d][i]] );
+                    }
+                    distance = d;
+                    break;
+                }
+            }
         }
-        this.result.innerHTML = '<b>' + imgs.length + ' results found.' + '</b>';
+        if ( distance > 0 ) {
+            this.result.innerHTML = '<b>' + imgs.length + ' similar results found. (Similarity: ' + 100 * ( 64 - distance ) / 64 + '%)</b>';
+        } else {
+            this.result.innerHTML = '<b>' + imgs.length + ' results found.' + '</b>';
+        }
         for ( var i in imgs ) {
             this.result.appendChild( document.createElement('br') );
             var id = imgs[i].replace( /[^0-9]/ig, '' );
