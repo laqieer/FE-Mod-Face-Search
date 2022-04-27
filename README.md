@@ -7,8 +7,8 @@ Search faces appeared in Fire Emblem Modding
 
 1. Click the button and upload the image:
 
-![Sample](https://user-images.githubusercontent.com/8841957/165350086-bf9a8ba7-105d-4cb8-a65d-fbe869529427.png)
+![Sample](https://user-images.githubusercontent.com/8841957/165586844-b5dbcfda-4d7f-4573-8741-a91185e47894.png)
 
 2. The results will show as follows:
 
-![image](https://user-images.githubusercontent.com/8841957/165350215-90ea0db5-7689-4f5a-bd6f-dcf5970c198d.png)
+![image](https://user-images.githubusercontent.com/8841957/165586718-5bebdffc-65ad-4b89-8862-2231b8728366.png)
